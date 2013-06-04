@@ -27,6 +27,7 @@ public class ChatServer extends WebSocketServer {
 	public void onOpen( WebSocket conn, ClientHandshake handshake ) {
 		this.sendToAll( "new connection: " + handshake.getResourceDescriptor() );
 		System.out.println( conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!" );
+		System.out.println("+++++SRIDHAR - onOpen() - socket opened");
 	}
 
 	@Override
@@ -39,6 +40,7 @@ public class ChatServer extends WebSocketServer {
 	public void onMessage( WebSocket conn, String message ) {
 		this.sendToAll( message );
 		System.out.println( conn + ": " + message );
+		System.out.println("++++ SRIDHAR: onMessage() - " + message);
 	}
 
 	public static void main( String[] args ) throws InterruptedException , IOException {
@@ -55,6 +57,8 @@ public class ChatServer extends WebSocketServer {
 		BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
 		while ( true ) {
 			String in = sysin.readLine();
+			// This happens too often
+//			System.out.println("+++++++ SRIDHAR: " + in + "was typed");
 			s.sendToAll( in );
 		}
 	}
