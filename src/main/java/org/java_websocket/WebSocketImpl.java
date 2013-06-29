@@ -46,7 +46,7 @@ public class WebSocketImpl implements WebSocket {
 
 	public static int RCVBUF = 16384;
 
-	public static/*final*/boolean DEBUG = false; // must be final in the future in order to take advantage of VM optimization
+	public static final boolean DEBUG = false; // must be final in the future in order to take advantage of VM optimization
 
 	public static final List<Draft> defaultdraftlist = new ArrayList<Draft>( 4 );
 	static {
@@ -152,9 +152,9 @@ public class WebSocketImpl implements WebSocket {
 		if( !socketBuffer.hasRemaining() || flushandclosestate )
 			return;
 
-		if( DEBUG )
-			System.out.println( "process(" + socketBuffer.remaining() + "): {" + ( socketBuffer.remaining() > 1000 ? "too big to display" : new String( socketBuffer.array(), socketBuffer.position(), socketBuffer.remaining() ) ) + "}" );
-
+		if( DEBUG ) {
+			//System.out.println( "process(" + socketBuffer.remaining() + "): {" + ( socketBuffer.remaining() > 1000 ? "too big to display" : new String( socketBuffer.array(), socketBuffer.position(), socketBuffer.remaining() ) ) + "}" );
+		}
 		if( readystate == READYSTATE.OPEN ) {
 			decodeFrames( socketBuffer );
 		} else {
@@ -315,7 +315,7 @@ public class WebSocketImpl implements WebSocket {
 			frames = draft.translateFrame( socketBuffer );
 			for( Framedata f : frames ) {
 				if( DEBUG )
-					System.out.println( "matched frame: " + f );
+					//System.out.println( "matched frame: " + f );
 				if( flushandclosestate )
 					return;
 				Opcode curop = f.getOpcode();
